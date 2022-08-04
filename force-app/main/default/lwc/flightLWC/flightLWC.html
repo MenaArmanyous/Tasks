@@ -1,0 +1,63 @@
+<template>
+    <lightning-card title="Flight Module" icon-name="custom:custom14">
+      <div class="slds-m-around_medium">
+        <div class="module" if:true={airportRecords}>
+          <div class="module-title">
+            <h2>Create a flight!</h2>
+          </div>
+          <div class="module-selection-section">
+            <div class="module-departure-section">
+              <lightning-input type="text" name="departure-text-filter" max-length="3" label="Filter by IATA for departure airport..." onchange={termChanged}></lightning-input>
+              <lightning-button label="Search" variant="brand" name="departure-search" onclick={searchAirport}></lightning-button>
+              <lightning-combobox
+                    name="departure-airport"
+                    label="Departure Airport"
+                    value={selectedDeparture}
+                    options={departureAirports}
+                    onchange={selectDeparture}
+                    placeholder="Select departure airport">
+              </lightning-combobox>
+            </div>
+            <div class="module-arrival-section">
+              <lightning-input type="text" name="arrival-text-filter" max-length="3" label="Filter by IATA for arrival airport..." onchange={termChanged}></lightning-input>
+              <lightning-button label="Search" variant="brand" name="arrival-search" onclick={searchAirport}></lightning-button>
+              <lightning-combobox
+                    name="arrival-airport"
+                    label="Arival Airport"
+                    value={selectedArrival}
+                    options={arrivalAirports}
+                    onchange={selectArrival}
+                    placeholder="Select arrival airport">
+                </lightning-combobox>
+            </div>
+          </div>
+          
+          <div class="module-submit-section">
+            <lightning-button label="Add Flight" variant="brand" name="add-flight" onclick={addFlight}></lightning-button>
+          </div>
+          <div class="module-result-section">
+            <h2 if:true={flightDistance}>The distance of the flight is {flightDistance} KM</h2>
+            <!-- <lightning-map
+              map-markers={flightsLocation}
+              selected-marker-value={selectedAirportLocation}
+              zoom-level="11"
+              markers-title="Flight locations">
+            </lightning-map> -->
+          </div>
+              
+      </div>
+        <div if:false={airportRecords}>
+            <h2>There is no airport to select or something went wrong!</h2>
+            <h1>Add two new airports then you will be able to add a flight.</h1>
+              <lightning-card title="Add new airport" icon-name="standard:record">
+                <div class="slds-m-around_medium">
+                    <lightning-input type="text" label="Airport Name" max-length="30" onchange={handelAirportNameChange} class="slds-m-bottom_x-small"></lightning-input>
+                    <lightning-input type="text" label="IATA" max-length="3" onchange={handelAirporIATAChange} class="slds-m-bottom_x-small"></lightning-input>
+                    <lightning-input-location label="Airport Location" latitude={airportRecord.Location__Latitude__s} longitude={airportRecord.Location__Longitude__s} onchange={handelAirporLocationChange} class="slds-m-bottom_x-small"></lightning-input-location>
+                    <lightning-button label="Add Ariport" variant="brand" onclick={addAirport}></lightning-button>
+                </div>
+             </lightning-card>
+        </div>
+      </div>
+    </lightning-card>
+</template>

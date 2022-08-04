@@ -1,0 +1,21 @@
+.module,.module-title,.module-selection-section,.module-submit-section,.module-result-section{
+    margin: 1vh;
+}
+.module-selection-section{
+    display: flex;
+    justify-content: space-around;
+}
+.module-title{
+    text-align: center;
+    font-size: 3vh;
+    font-weight: 700;
+}
+lightning-input{
+    margin-bottom: 3vh !important;
+}
+.module-result-section{
+    color: green;
+    text-align: center;
+    font-size: 3vh;
+    font-weight: 700;
+}
